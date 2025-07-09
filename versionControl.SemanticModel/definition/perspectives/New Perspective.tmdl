@@ -1,0 +1,10 @@
+perspective 'New Perspective'
+
+	perspectiveTable AMZN
+
+		perspectiveColumn Open
+
+		perspectiveColumn Low
+
+		perspectiveColumn Date
+

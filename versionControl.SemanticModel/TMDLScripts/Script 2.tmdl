@@ -1,0 +1,14 @@
+createOrReplace
+
+	ref table AMZN
+
+		column Close
+			dataType: double
+			lineageTag: b16dcdc4-2b1d-40b6-95f2-68b28711dd50
+			summarizeBy: sum
+			sourceColumn: Close
+
+			annotation SummarizationSetBy = Automatic
+
+			annotation PBI_FormatHint = {"isGeneralNumber":true}
+

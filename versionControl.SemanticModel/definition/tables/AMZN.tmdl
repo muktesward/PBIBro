@@ -1,0 +1,80 @@
+table AMZN
+	lineageTag: 86699365-8baf-4ba4-8424-027f8f49ac43
+
+	column Date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a1d2ac64-d1e2-438f-b08e-9ebbf66b318c
+		summarizeBy: none
+		sourceColumn: Date
+
+		variation Variation
+			isDefault
+			relationship: 3355df6a-0f47-46b1-ac03-9dab91c8d301
+			defaultHierarchy: LocalDateTable_a7c4a683-0a74-4276-8d2f-24dbd393224f.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Open
+		dataType: double
+		lineageTag: f7196066-d7b9-41b9-adda-a51d94420135
+		summarizeBy: sum
+		sourceColumn: Open
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column High
+		dataType: double
+		lineageTag: b99b2ecc-8f3e-4f73-9bd1-e614f83f61b8
+		summarizeBy: sum
+		sourceColumn: High
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Low
+		dataType: double
+		lineageTag: b9886917-6f3e-40ff-be47-a7c716c047d7
+		summarizeBy: sum
+		sourceColumn: Low
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Close
+		dataType: double
+		lineageTag: b16dcdc4-2b1d-40b6-95f2-68b28711dd50
+		summarizeBy: sum
+		sourceColumn: Close
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Volume
+		dataType: int64
+		formatString: #,##0
+		lineageTag: 13897764-d374-486f-9592-500c2552ab87
+		summarizeBy: sum
+		sourceColumn: Volume
+
+		annotation SummarizationSetBy = Automatic
+
+	partition AMZN = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\FromHardDisk\Power BI\PBIBro\PBIBro\AMZN.csv"),[Delimiter=",", Columns=6, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Date", type datetime}, {"Open", type number}, {"High", type number}, {"Low", type number}, {"Close", type number}, {"Volume", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
