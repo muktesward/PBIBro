@@ -1,0 +1,157 @@
+table Products
+	lineageTag: 366fb67f-9afb-49f5-b3c8-c5e6c3ff7187
+
+	column ProductID
+		dataType: int64
+		formatString: 0
+		lineageTag: b5579920-7f11-4f2d-9140-5a4312c744df
+		summarizeBy: none
+		sourceColumn: ProductID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Product
+		dataType: string
+		lineageTag: 9c26428d-e33a-4144-b0cd-5d0038acb099
+		summarizeBy: none
+		sourceColumn: Product
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Code'
+		dataType: string
+		lineageTag: 836439de-126c-4931-8bf7-564066114e65
+		summarizeBy: none
+		sourceColumn: Product Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Abbrev' = LEFT(Products[Product Code], 2)
+		lineageTag: cacf852a-5cb8-4f49-9af7-5db0b95aaa5a
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Color' = RIGHT(Products[Product Code], 2)
+		lineageTag: 00749204-88c3-4579-b253-ae92d6a5d853
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Number' = MID(Products[Product Code], 4, 4)
+		lineageTag: eb016486-34f4-4b6d-95dd-823ef9918758
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'First Hyphen' = FIND("-", Products[Product Code])
+		formatString: 0
+		lineageTag: ad194dea-e829-468b-b9b1-f962a71b8e11
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Abbrev Dynamic' = LEFT(Products[Product Code], FIND("-", Products[Product Code]) - 1)
+		lineageTag: 29d5ce87-a64d-449b-984d-fa8abb40da00
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Last Hyphen' = SEARCH("-", Products[Product Code], FIND("-", Products[Product Code])+1)
+		formatString: 0
+		lineageTag: 6f2433ee-80a4-4c87-86d2-e107516b0448
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Color Dynamic' =
+			
+			VAR _firstHyphenPosition = FIND("-", Products[Product Code])
+			VAR _lastHyphenPosition = SEARCH("-", Products[Product Code], _firstHyphenPosition + 1)
+			
+			RETURN
+			RIGHT(Products[Product Code], LEN(Products[Product Code]) - _lastHyphenPosition)
+		lineageTag: 4c81fe12-a8d2-4f5e-89ac-cf0803cdd1f2
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Position with FIND' = FIND("rd", Products[Product Code], 1, -1)
+		formatString: 0
+		lineageTag: ac345982-fe28-4826-b71a-16d745395d84
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Position with SEARCH' = SEARCH("rd", Products[Product Code], 1, -1)
+		formatString: 0
+		lineageTag: 9de23062-97ca-4f0a-94b3-964af423f913
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Number Dynamic' =
+			
+			VAR _firstHyphenPosition = FIND("-", Products[Product Code])
+			VAR _lastHyphenPosition = SEARCH("-", Products[Product Code], _firstHyphenPosition + 1)
+			VAR _productNumberLength = _lastHyphenPosition - _firstHyphenPosition -1
+			RETURN
+			MID(Products[Product Code], _firstHyphenPosition + 1, _productNumberLength)
+		lineageTag: 1438f63d-65c4-483a-bd42-1a6f36a9704a
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Label' = CONCATENATE(Products[Product Abbrev Dynamic], Products[Product Number Dynamic])
+		lineageTag: e29932de-fadf-4444-bb59-91101f7c1f94
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Label Color' = ```
+			
+			    REPLACE(
+			        Products[Product Label],
+			        LEN(Products[Product Abbrev Dynamic])+1,
+			        LEN(Products[Product Number Dynamic]),
+			        Products[Product Color Dynamic]
+			)
+			```
+		lineageTag: 955d144c-faf5-4865-8856-238edde21620
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Label Color Updated' = ```
+			
+			VAR _initialColorLabel =     
+			    REPLACE(
+			        Products[Product Label],
+			        LEN(Products[Product Abbrev Dynamic])+1,
+			        LEN(Products[Product Number Dynamic]),
+			        Products[Product Color Dynamic]
+			    )
+			
+			RETURN
+			SUBSTITUTE(
+			    SUBSTITUTE(_initialColorLabel, "TBL", "TB"),
+			    "BLK",
+			    "BK"
+			)
+			```
+		lineageTag: 87e10e2b-5ac5-4b7f-a70c-d464b9a62e03
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Products-70125af7-54b3-47f9-b2cd-231bb4ed448b = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("bc49C8MgEAbg/+Kcg/qV01UKHWKXJJt1sBDo0CZS/P9ULSlUst29Dy93zhFKOjK9wjvFx7YuZbmC1JyDGYjvHGEHjooqGM/V+VGfagnGVhc5siGmLZZhhp6fFFzGarIxoTTC9O31jSHTv58wR3O4P5dUBgNSULbfU42hRNzv6X+zIJEKlZvDbSXefwA=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [ProductID = _t, Product = _t, #"Product Code" = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"ProductID", Int64.Type}, {"Product", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

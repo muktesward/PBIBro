@@ -1,0 +1,370 @@
+table _Measures
+	lineageTag: c0542ab0-edf1-4c97-906a-75bd1ea3a38e
+
+	measure 'YTD Sales DATESYTD' =
+			
+			CALCULATE(
+			    SUM(Sales[Amount]),
+			    DATESYTD(Dates[Date])
+			)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		displayFolder: Time Intelligence Examples
+		lineageTag: a0ecbcf9-8190-4f65-ac59-790ae65971b4
+
+	measure 'Cumulative Sales' =
+			
+			CALCULATE(
+			    SUM(Sales[Amount]),
+			    FILTER(
+			        ALL(Sales),
+			        Sales[SalesDate] <= MAX(Sales[SalesDate])
+			    )
+			)
+		formatString: 0
+		displayFolder: CALCULATE Examples
+		lineageTag: 3d1de8ff-4464-4b26-a297-5ab7553fa420
+
+	measure 'High Performing Average' =
+			
+			CALCULATE(
+			    AVERAGE(Sales[Amount]),
+			    FILTER(
+			        ALL(Sales[RegionID]),
+			        CALCULATE(
+			            SUM(Sales[Amount])
+			        ) > 37500
+			    )
+			)
+		displayFolder: CALCULATE Examples
+		lineageTag: 07efe3fa-e61e-47ba-b4b7-fe03e44f748f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'US Previous Year Smartphone Sales' =
+			
+			CALCULATE(
+			    SUM(Sales[Amount]),
+			    SAMEPERIODLASTYEAR(Dates[Date]),
+			    Products[Product] = "Smartphone",
+			    Regions[Region] = "United States"
+			)
+		formatString: 0
+		displayFolder: CALCULATE Examples
+		lineageTag: 39d8aa5d-9a3c-4b89-8a88-8506285d1e6f
+
+	measure 'US Smartphone Sales vs. Average Smartphone Sales' =
+			
+			CALCULATE(
+			    SUM(Sales[Amount]),
+			    Products[Product] = "Smartphone",
+			    Regions[Region] = "United States"
+			)
+			- AVERAGEX(
+			    FILTER(
+			        Sales,
+			        RELATED(Products[Product]) = "Smartphone"
+			    ),
+			    Sales[Amount]
+			)
+		displayFolder: CALCULATE Examples
+		lineageTag: ba152dbe-3ea4-4326-9c86-0bc6676e6671
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'YTD Sales' =
+			
+			CALCULATE(
+			    SUM(Sales[Amount]),
+			    DATESYTD(
+			        Dates[Date],
+			        "12/31"
+			    )
+			)
+		formatString: 0
+		displayFolder: CALCULATE Examples
+		lineageTag: 9800358c-080a-4251-9d9c-43baea4b2560
+
+	measure 'Smartphone Sales' =
+			
+			CALCULATE(
+			    SUM(Sales[Amount]),
+			    KEEPFILTERS(Sales[ProductID] = 1)
+			)
+		formatString: 0
+		displayFolder: CALCULATE Examples
+		lineageTag: c415c67b-9932-4747-864a-a2a76e80cd5a
+
+	measure 'YTD Sales TOTALYTD' =
+			
+			TOTALYTD(SUM(Sales[Amount]), Dates[Date])
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		displayFolder: Time Intelligence Examples
+		lineageTag: 284c7d3a-09e5-4040-a009-2f69691b1145
+
+	measure 'Sales LY DATEADD' =
+			
+			CALCULATE(
+			    SUM(Sales[Amount]),
+			    DATEADD(Dates[Date], -1, YEAR)
+			)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		displayFolder: Time Intelligence Examples
+		lineageTag: a100c32c-2a4e-4bef-a61e-5e5050a560d1
+
+	measure 'Sales LY SAMEPERIODLASTYEAR' =
+			
+			CALCULATE(
+			    SUM(Sales[Amount]),
+			    SAMEPERIODLASTYEAR(Dates[Date])
+			)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		displayFolder: Time Intelligence Examples
+		lineageTag: f1c9cbbf-edf0-437d-b4f4-609268c75206
+
+	measure 'Sales 3 Month Rolling Average DATESBETWEEN' =
+			
+			CALCULATE(
+			    AVERAGE(Sales[Amount]),
+			    DATESBETWEEN(
+			        Dates[Date],
+			        EDATE(LASTDATE(Dates[Date]), -3),
+			        LASTDATE(Dates[Date])
+			    )
+			)
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		displayFolder: Time Intelligence Examples
+		lineageTag: 3d0c551d-f2fe-4eda-a9c1-4fb1754c3d12
+
+	measure 'Sales 3 Month Rolling Average DATESINPERIOD' =
+			
+			CALCULATE(
+			    AVERAGE(Sales[Amount]),
+			    DATESINPERIOD(Dates[Date], LASTDATE(Dates[Date]), -3, MONTH)
+			)
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		displayFolder: Time Intelligence Examples
+		lineageTag: 6b973cee-7e09-4359-ae1f-f747bd70fe10
+
+	measure 'Yearly Page Title' = COMBINEVALUES(" ", Year(TODAY()), "- Year to date sales:", FORMAT([YTD Sales TOTALYTD], "Currency"))
+		displayFolder: Text Functions Examples
+		lineageTag: b7bb82b1-41bf-4083-ba6e-643771a5a9cb
+
+	measure 'Use Four Digit Years' = DATE(23, 1, 1)
+		formatString: General Date
+		displayFolder: Date Functions
+		lineageTag: d0e7359c-b703-4256-a86b-a15f294a378a
+
+	measure '15 Months' = DATE(2023, 15, 1)
+		formatString: General Date
+		displayFolder: Date Functions
+		lineageTag: 6224fb97-cc7f-4c5c-8fd0-4976f356c193
+
+	measure '15 Months and 35 days' = DATE(2023, 15, 35)
+		formatString: General Date
+		displayFolder: Date Functions
+		lineageTag: eb2de3db-f2d5-4c6f-9b79-24bbe9e7d37f
+
+	measure 'Current Year' = YEAR(TODAY())
+		formatString: 0
+		displayFolder: Date Functions
+		lineageTag: 95d1dc74-86ed-4a10-9f66-e3905daf1eed
+
+	measure 'Current Month' = MONTH(TODAY())
+		formatString: 0
+		displayFolder: Date Functions
+		lineageTag: 59801f75-ade0-4843-9371-93c9a5bcd74f
+
+	measure 'Current Day' = DAY(TODAY())
+		formatString: 0
+		displayFolder: Date Functions
+		lineageTag: 4310e629-2a61-4d0d-91c6-d22dfae1e63c
+
+	measure Today = TODAY()
+		formatString: Short Date
+		displayFolder: Date Functions
+		lineageTag: e2ae7d6e-9701-4420-b88f-24af8dab1d9d
+
+	measure Now = NOW()
+		formatString: General Date
+		displayFolder: Date Functions
+		lineageTag: 4c2fee6a-db03-421e-b1bf-c9f6c4755fcf
+
+	measure '3 Months after Sale' = EDATE(MAX(Sales[SalesDate]), 3)
+		formatString: Short Date
+		displayFolder: Date Functions
+		lineageTag: f9eadffc-9b65-4f79-a6e3-54bc512bfb8e
+
+	measure 'Sales End of Month' = EOMONTH(MAX(Sales[SalesDate]), 0)
+		formatString: Short Date
+		displayFolder: Date Functions
+		lineageTag: fd165dc1-fe09-4f11-ac96-a7a903741282
+
+	measure 'Days Between Last Sale and Today' =
+			
+			DATEDIFF(MAX(Sales[SalesDate]), TODAY(), DAY)
+		formatString: 0
+		displayFolder: Date Functions
+		lineageTag: c2b5fe90-3aee-470c-9d5a-9d190eef669c
+
+	measure 'Last Sale' = MAX(Sales[SalesDate])
+		formatString: Short Date
+		displayFolder: Date Functions
+		lineageTag: 9ad770c5-386f-4fe6-ad81-d70b5b32e8a2
+
+	measure Hour = HOUR(13.63)
+		formatString: 0
+		displayFolder: Date Functions
+		lineageTag: 1730c3a3-2876-4ff6-acc7-aad193952498
+
+	measure Minute = MINUTE(13.63)
+		formatString: 0
+		displayFolder: Date Functions
+		lineageTag: db788648-87d3-4a31-902c-3d9dfda39268
+
+	measure Second = SECOND(13.63)
+		formatString: 0
+		displayFolder: Date Functions
+		lineageTag: f14c5b02-94e0-413d-96b0-0a82d733ebb1
+
+	measure 'Current Hour' = HOUR([Now])
+		formatString: 0
+		displayFolder: Date Functions
+		lineageTag: 5f1abb3f-2d53-45a6-a716-02d508c3b12d
+
+	measure 'Current Minute' = MINUTE([Now])
+		formatString: 0
+		displayFolder: Date Functions
+		lineageTag: d806018e-acbb-418b-9ce1-4c5e9b46d483
+
+	measure 'Current Second' = SECOND([Now])
+		formatString: 0
+		displayFolder: Date Functions
+		lineageTag: 79128c9b-7799-43f1-ad91-674db50b381f
+
+	measure 'Text to Time' = TIMEVALUE("18:15")
+		formatString: Short Time
+		displayFolder: Date Functions
+		lineageTag: a158ebed-d37c-4774-a84c-76aef3294277
+
+	measure 'Workday Between Last Sale and Today' =
+			
+			NETWORKDAYS(MAX(Sales[SalesDate]), [Today], 1)
+		formatString: 0
+		displayFolder: Date Functions
+		lineageTag: 2acc4313-af48-43f1-9f1b-1591c1308619
+
+	measure 'Workday Between Last Sale and Today (No Holidays)' = ```
+			
+			NETWORKDAYS(
+			    MAX(Sales[SalesDate]), 
+			    [Today], 
+			    1,
+			    {DATE (2023, 9, 4)}
+			)
+			```
+		formatString: 0
+		displayFolder: Date Functions
+		lineageTag: 58608e7d-e66b-4eee-851a-3863d123bfa9
+
+	measure 'Current Quarter' = QUARTER(TODAY())
+		formatString: 0
+		displayFolder: Date Functions
+		lineageTag: 87669dd0-e351-4f23-a1e9-2815d2362c5a
+
+	measure 'Current Weekday' = WEEKDAY(DATE(2023, 10, 16), 2)
+		formatString: 0
+		displayFolder: Date Functions
+		lineageTag: 7ece3d4e-31e7-4e14-8297-a3af57e543cd
+
+	measure 'Weekday (1)' = WEEKDAY(DATE(2023, 10, 16), 1)
+		formatString: 0
+		displayFolder: Date Functions
+		lineageTag: 3a5a79b7-50f8-449b-81a6-0431f260e0e8
+
+	measure 'Weekday (2)' = WEEKDAY(DATE(2023, 10, 16), 2)
+		formatString: 0
+		displayFolder: Date Functions
+		lineageTag: d0436c00-513b-4020-bb7e-0d6aa2128dd5
+
+	measure 'Weekday (3)' = WEEKDAY(DATE(2023, 10, 16), 3)
+		formatString: 0
+		displayFolder: Date Functions
+		lineageTag: c3b9e1ef-8243-42c8-bbf4-cdaaae21286f
+
+	measure 'Fraction of Year Between Last Sale and Today' = YEARFRAC(MAX(Sales[SalesDate]), TODAY(), 0)
+		displayFolder: Date Functions
+		lineageTag: cbed4aa0-3c81-4404-953b-1de6854ab5da
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Week Number System 1' = WEEKNUM(DATE(2027, 1, 6), 1)
+		formatString: 0
+		displayFolder: Date Functions
+		lineageTag: 3839dead-a36a-40aa-b82d-f2d050ef3262
+
+	measure 'Week Number System 2' = WEEKNUM(DATE(2027, 1, 6), 21)
+		formatString: 0
+		displayFolder: Date Functions
+		lineageTag: 469e50e5-34fc-4f19-a84a-29d21cf177a4
+
+	measure 'Jan 2027' = DATE(2027, 01, 06)
+		formatString: General Date
+		displayFolder: Date Functions
+		lineageTag: e65baa4c-4ca6-43bb-a873-0822cdbb1d30
+
+	measure totalamount = SUM(Sales[Amount])
+		formatString: 0
+		lineageTag: be27feae-5097-45dd-97a3-4601f591ccf9
+
+	measure 'top product wrt totalamount' =
+			
+			INDEX(
+			    1,ALLSELECTED(Products[Product Code]),
+			    ORDERBY( [totalamount] , DESC)
+			)
+		lineageTag: 3d4cc825-dbd0-4da7-9d48-ccce79276e45
+
+	measure last5DaysSalesAmount = ```
+			
+			VAR alldatessales = 
+			SUMMARIZECOLUMNS(
+				Dates[Date],
+				"sales",[totalamount]
+			)
+			VAR last5daysales = 
+			CALCULATE(
+				[totalamount],
+				TOPN(
+					5,
+					alldatessales,
+					Dates[Date],DESC
+				)
+			)
+			RETURN
+				{last5daysales}
+					
+			```
+		formatString: 0
+		lineageTag: b9135c5b-b648-4841-960e-7c78bfeec0e6
+
+	measure last5DaysSalesAmount(diff) =
+			
+			CALCULATE(
+			    [totalamount],
+			    DATESINPERIOD(Sales[SalesDate],MAX(Sales[SalesDate]),-5,DAY)
+			)
+		formatString: 0
+		lineageTag: 52a8092a-cc8a-4f26-abce-d490dcb16961
+
+	partition _Measures = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Measures = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Measures", type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Measures"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+

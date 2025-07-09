@@ -1,0 +1,22 @@
+relationship 632b1e9f-7ca0-46c6-9d88-3d0b46d5c731
+	fromColumn: Sales.EmployeeID
+	toColumn: Employee.EmployeeID
+
+relationship 2378397f-d9ee-4548-9f80-aa039fd06e45
+	fromColumn: Sales.ProductID
+	toColumn: Products.ProductID
+
+relationship 7dbe4daa-0f88-48fd-a57d-66add8a6f7cc
+	fromColumn: Sales.RegionID
+	toColumn: Regions.RegionID
+
+relationship 9cac1fdf-2b11-48fc-b100-2236b0a30a9a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Sales.SalesDate
+	toColumn: LocalDateTable_efaa5548-4d31-4504-8156-1eb1363d0e16.Date
+
+relationship 193ac5a2-255e-441a-8848-dcf7f287c9ca
+	isActive: false
+	fromColumn: Sales.'Date Key'
+	toColumn: Dates.'Date Key'
+

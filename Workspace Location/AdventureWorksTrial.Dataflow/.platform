@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "AdventureWorksTrial"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "94dd3bbd-94f3-a050-4f3c-bb1a43bfa5ff"
+  }
+}
