@@ -1,0 +1,88 @@
+table Sales
+	lineageTag: 8ca73b1c-f9c4-482c-a00f-7b84ef4eb196
+
+	column SalesID
+		dataType: int64
+		formatString: 0
+		lineageTag: 80e1b82a-6e4c-41d1-809a-adc9601f4c65
+		summarizeBy: count
+		sourceColumn: SalesID
+
+		annotation SummarizationSetBy = Automatic
+
+	column SalesDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 17414ee6-598e-435e-9f3a-254d2fdeea85
+		summarizeBy: none
+		sourceColumn: SalesDate
+
+		variation Variation
+			isDefault
+			relationship: 0cbbb1ff-6b20-402b-80c3-856ca8e46607
+			defaultHierarchy: LocalDateTable_8641dc25-6933-4639-9350-c0eade13e2c6.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column SalesAmount
+		dataType: int64
+		formatString: 0
+		lineageTag: 0e3d8d43-6742-4b1f-8044-c109d500bea1
+		summarizeBy: sum
+		sourceColumn: SalesAmount
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: string
+		lineageTag: 80e9e3a6-6277-43f0-8d98-dff6fdc5c888
+		summarizeBy: none
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthName
+		dataType: string
+		lineageTag: 964930bd-e454-4ce2-bfec-ef4154ed867a
+		summarizeBy: none
+		sourceColumn: MonthName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year-Default
+		dataType: string
+		lineageTag: a70c11d1-3b47-4789-95cb-0df22e607c75
+		summarizeBy: none
+		sourceColumn: Year-Default
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthName-Default
+		dataType: string
+		lineageTag: 3ae044c8-32bc-4266-9f67-459e15985a20
+		summarizeBy: none
+		sourceColumn: MonthName-Default
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Sales = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("MUKTESWAR\MSSQLSERVER02"),
+				    practice = Source{[Name="practice"]}[Data],
+				    dbo_Sales = practice{[Schema="dbo",Item="Sales"]}[Data],
+				    #"Added Custom" = Table.AddColumn(dbo_Sales, "Year", each Date.Year([SalesDate])),
+				    #"Added Custom1" = Table.AddColumn(#"Added Custom", "MonthName", each Date.MonthName([SalesDate])),
+				    #"Added Custom2" = Table.AddColumn(#"Added Custom1", "Year-Default", each if Date.Year(DateTime.LocalNow()) = [Year] then "Current" else [Year], type text),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Added Custom2",{{"Year-Default", type text}}),
+				    #"Added Custom3" = Table.AddColumn(#"Changed Type", "MonthName-Default", each if Date.MonthName(DateTime.LocalNow()) = [MonthName] then "Current" else [MonthName] )
+				in
+				    #"Added Custom3"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,31 @@
+table Employee
+	lineageTag: e78bd75f-eaa7-4d1a-a8fd-d0b29cad0482
+
+	column EmployeeID
+		dataType: int64
+		formatString: 0
+		lineageTag: 29c60fbf-bd93-4f9f-b859-bf6b0aa6fbe0
+		summarizeBy: none
+		sourceColumn: EmployeeID
+
+		annotation SummarizationSetBy = Automatic
+
+	column EmployeeName
+		dataType: string
+		lineageTag: 1627f021-9a6d-4474-bb05-0aa0a8b40814
+		summarizeBy: none
+		sourceColumn: EmployeeName
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Employee-6c7635d7-6567-4853-868c-d63273ce88e3 = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WMlTSUfLKz8hTCM7NLMlQitWJVjICCgUnFiVmKIAkivPzwKLGQFGXxLLMFAWf1FSl2FgA", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [EmployeeID = _t, EmployeeName = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"EmployeeID", Int64.Type}, {"EmployeeName", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

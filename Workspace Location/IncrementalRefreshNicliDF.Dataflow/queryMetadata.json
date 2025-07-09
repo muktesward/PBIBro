@@ -1,0 +1,25 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "IncrementalRefreshNicliDF",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "gatewayObjectId": "73212cdf-cbd2-49fb-b15d-f01be57e2d90",
+  "queriesMetadata": {
+    "DimAgent": {
+      "queryId": "4363cb39-4d1e-496a-87bf-3ca2d394a5ed",
+      "queryName": "DimAgent"
+    },
+    "FactCallsHandled": {
+      "queryId": "e3750d7c-eb2d-4034-9c84-3792a5f12a2f",
+      "queryName": "FactCallsHandled"
+    }
+  },
+  "connections": [
+    {
+      "path": "mukteswar\\mssqlserver02;practice",
+      "kind": "SQL",
+      "connectionId": "{\"ClusterId\":\"73212cdf-cbd2-49fb-b15d-f01be57e2d90\",\"DatasourceId\":\"3d51bcd4-2dca-4a41-aede-166fbd76be97\"}"
+    }
+  ]
+}

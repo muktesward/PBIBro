@@ -1,0 +1,174 @@
+{
+  "config": "{\"version\":\"5.44\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY23SU04\",\"version\":\"5.45\",\"type\":2}},\"activeSectionIndex\":2,\"defaultDrillFilterOtherVisuals\":true,\"linguisticSchemaSyncVersion\":2,\"settings\":{\"useNewFilterPaneExperience\":true,\"allowChangeFilterTypes\":true,\"useStylableVisualContainerHeader\":true,\"queryLimitOption\":6,\"exportDataMode\":1,\"useDefaultAggregateDisplayName\":true,\"useEnhancedTooltips\":true},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Top'\"}}}}}],\"outspacePane\":[{\"properties\":{\"expanded\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}",
+  "layoutOptimization": 0,
+  "resourcePackages": [
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "items": [
+          {
+            "name": "CY23SU04",
+            "path": "BaseThemes/CY23SU04.json",
+            "type": 202
+          }
+        ],
+        "name": "SharedResources",
+        "type": 2
+      }
+    }
+  ],
+  "sections": [
+    {
+      "config": "{}",
+      "displayName": "Top selling products",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "8222c1d5da12cea41710",
+      "ordinal": 1,
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"d74e6a8d64d0d1bd4eba\",\"layouts\":[{\"id\":0,\"position\":{\"x\":98.92416458086329,\"y\":152.88279980678874,\"z\":0,\"width\":555.773942827032,\"height\":383.1063101040706,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"Products.Product Code\"},{\"queryRef\":\"_Measures.totalamount\"},{\"queryRef\":\"_Measures.top product wrt totalamount\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"_\",\"Entity\":\"_Measures\",\"Type\":0},{\"Name\":\"p\",\"Entity\":\"Products\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"totalamount\"},\"Name\":\"_Measures.totalamount\",\"NativeReferenceName\":\"totalamount\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"Product Code\"},\"Name\":\"Products.Product Code\",\"NativeReferenceName\":\"Product Code\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"top product wrt totalamount\"},\"Name\":\"_Measures.top product wrt totalamount\",\"NativeReferenceName\":\"top product wrt totalamount\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"totalamount\"}}}]},\"drillFilterOtherVisuals\":true}}",
+          "filters": "[]",
+          "height": 383.11,
+          "width": 555.77,
+          "x": 98.92,
+          "y": 152.88,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"e034fad58ada2d250959\",\"layouts\":[{\"id\":0,\"position\":{\"x\":814.775391911474,\"y\":152.88279980678874,\"z\":1,\"width\":415.4814912396258,\"height\":192.45246563913403}}],\"singleVisual\":{\"visualType\":\"card\",\"projections\":{\"Values\":[{\"queryRef\":\"_Measures.top product wrt totalamount\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"_\",\"Entity\":\"_Measures\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"top product wrt totalamount\"},\"Name\":\"_Measures.top product wrt totalamount\",\"NativeReferenceName\":\"top product wrt totalamount\"}]},\"autoSelectVisualType\":true,\"drillFilterOtherVisuals\":true}}",
+          "filters": "[]",
+          "height": 192.45,
+          "width": 415.48,
+          "x": 814.78,
+          "y": 152.88,
+          "z": 1.00
+        }
+      ],
+      "width": 1280.00
+    },
+    {
+      "config": "{\"objects\":{\"outspacePane\":[{\"properties\":{\"width\":{\"expr\":{\"Literal\":{\"Value\":\"203L\"}}}}}]}}",
+      "displayName": "CALCULATE",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "ReportSection",
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"150fee9018613c9ff934\",\"layouts\":[{\"id\":0,\"position\":{\"x\":879.5747911921034,\"y\":212.8473804100228,\"z\":5000,\"width\":379.04328018223237,\"height\":244.92027334851937,\"tabOrder\":5000}}],\"singleVisual\":{\"visualType\":\"clusteredColumnChart\",\"projections\":{\"Y\":[{\"queryRef\":\"Sales.YTD Sales\"}],\"Category\":[{\"queryRef\":\"Products.Product\",\"active\":true}],\"Series\":[{\"queryRef\":\"Dates.Year\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"p\",\"Entity\":\"Products\",\"Type\":0},{\"Name\":\"d\",\"Entity\":\"Dates\",\"Type\":0},{\"Name\":\"_\",\"Entity\":\"_Measures\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"YTD Sales\"},\"Name\":\"Sales.YTD Sales\",\"NativeReferenceName\":\"YTD Sales\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"Product\"},\"Name\":\"Products.Product\",\"NativeReferenceName\":\"Product\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Year\"},\"Name\":\"Dates.Year\",\"NativeReferenceName\":\"Year\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"YTD Sales\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "filters": "[]",
+          "height": 244.92,
+          "width": 379.04,
+          "x": 879.57,
+          "y": 212.85,
+          "z": 5000.00
+        },
+        {
+          "config": "{\"name\":\"2001efba38ce442be654\",\"layouts\":[{\"id\":0,\"position\":{\"x\":9.719058466211086,\"y\":0,\"z\":0,\"width\":409.17236142748675,\"height\":359.60516324981023,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"Sales.SalesDate\"},{\"queryRef\":\"Sum(Dates.Quarter)\"},{\"queryRef\":\"Products.Product\"},{\"queryRef\":\"Regions.Region\"},{\"queryRef\":\"Sum(Sales.Amount)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"s\",\"Entity\":\"Sales\",\"Type\":0},{\"Name\":\"p\",\"Entity\":\"Products\",\"Type\":0},{\"Name\":\"d\",\"Entity\":\"Dates\",\"Type\":0},{\"Name\":\"r\",\"Entity\":\"Regions\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"SalesDate\"},\"Name\":\"Sales.SalesDate\",\"NativeReferenceName\":\"SalesDate\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Amount\"},\"Name\":\"Sum(Sales.Amount)\",\"NativeReferenceName\":\"Amount1\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"Product\"},\"Name\":\"Products.Product\",\"NativeReferenceName\":\"Product\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Quarter\"},\"Name\":\"Sum(Dates.Quarter)\",\"NativeReferenceName\":\"Quarter1\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"r\"}},\"Property\":\"Region\"},\"Name\":\"Regions.Region\",\"NativeReferenceName\":\"Region\"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"SalesDate\"}}}]},\"drillFilterOtherVisuals\":true}}",
+          "filters": "[]",
+          "height": 359.61,
+          "width": 409.17,
+          "x": 9.72,
+          "y": 0.00,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"3ceebc31380ad9776e6f\",\"layouts\":[{\"id\":0,\"position\":{\"x\":9.719058466211086,\"y\":359.60516324981023,\"z\":1000,\"width\":379.04328018223237,\"height\":121.48823082763859,\"tabOrder\":1000}}],\"singleVisual\":{\"visualType\":\"card\",\"projections\":{\"Values\":[{\"queryRef\":\"Sales.US Previous Year Smartphone Sales\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"_\",\"Entity\":\"_Measures\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"US Previous Year Smartphone Sales\"},\"Name\":\"Sales.US Previous Year Smartphone Sales\",\"NativeReferenceName\":\"US Previous Year Smartphone Sales\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"US Previous Year Smartphone Sales\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "filters": "[]",
+          "height": 121.49,
+          "width": 379.04,
+          "x": 9.72,
+          "y": 359.61,
+          "z": 1000.00
+        },
+        {
+          "config": "{\"name\":\"422a6bd43661cf6891c4\",\"layouts\":[{\"id\":0,\"position\":{\"x\":440.27334851936223,\"y\":359.60516324981023,\"z\":3000,\"width\":410.14426727410785,\"height\":334.3356112376614,\"tabOrder\":3000}}],\"singleVisual\":{\"visualType\":\"clusteredColumnChart\",\"projections\":{\"Y\":[{\"queryRef\":\"Sales.High Performing Average\"}],\"Category\":[{\"queryRef\":\"Regions.Region\",\"active\":true}],\"Series\":[{\"queryRef\":\"Products.Product\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"r\",\"Entity\":\"Regions\",\"Type\":0},{\"Name\":\"p\",\"Entity\":\"Products\",\"Type\":0},{\"Name\":\"_\",\"Entity\":\"_Measures\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"r\"}},\"Property\":\"Region\"},\"Name\":\"Regions.Region\",\"NativeReferenceName\":\"Region\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"Product\"},\"Name\":\"Products.Product\",\"NativeReferenceName\":\"Product\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"High Performing Average\"},\"Name\":\"Sales.High Performing Average\",\"NativeReferenceName\":\"High Performing Average\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"High Performing Average\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"vcObjects\":{\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'High Performing Average'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 334.34,
+          "width": 410.14,
+          "x": 440.27,
+          "y": 359.61,
+          "z": 3000.00
+        },
+        {
+          "config": "{\"name\":\"42d95c495d21faf89612\",\"layouts\":[{\"id\":0,\"position\":{\"x\":879.5747911921034,\"y\":0,\"z\":4000,\"width\":379.04328018223237,\"height\":212.8473804100228,\"tabOrder\":4000}}],\"singleVisual\":{\"visualType\":\"card\",\"projections\":{\"Values\":[{\"queryRef\":\"Sales.Product Sales vs. Average\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"_\",\"Entity\":\"_Measures\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"US Smartphone Sales vs. Average Smartphone Sales\"},\"Name\":\"Sales.Product Sales vs. Average\",\"NativeReferenceName\":\"Product Sales vs. Average\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"US Smartphone Sales vs. Average Smartphone Sales\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "filters": "[]",
+          "height": 212.85,
+          "width": 379.04,
+          "x": 879.57,
+          "y": 0.00,
+          "z": 4000.00
+        },
+        {
+          "config": "{\"name\":\"5a3209a5adcc9555155a\",\"layouts\":[{\"id\":0,\"position\":{\"x\":440.27334851936223,\"y\":0,\"z\":2000,\"width\":410.14426727410785,\"height\":359.60516324981023,\"tabOrder\":2000}}],\"singleVisual\":{\"visualType\":\"lineChart\",\"projections\":{\"Category\":[{\"queryRef\":\"Dates.Date\",\"active\":true}],\"Y\":[{\"queryRef\":\"Sales.Cumulative Sales\"}],\"Series\":[{\"queryRef\":\"Products.Product\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"Dates\",\"Type\":0},{\"Name\":\"p\",\"Entity\":\"Products\",\"Type\":0},{\"Name\":\"_\",\"Entity\":\"_Measures\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Date\"},\"Name\":\"Dates.Date\",\"NativeReferenceName\":\"Date\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"Cumulative Sales\"},\"Name\":\"Sales.Cumulative Sales\",\"NativeReferenceName\":\"Cumulative Sales\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"Product\"},\"Name\":\"Products.Product\",\"NativeReferenceName\":\"Product\"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Date\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "filters": "[]",
+          "height": 359.61,
+          "width": 410.14,
+          "x": 440.27,
+          "y": 0.00,
+          "z": 2000.00
+        },
+        {
+          "config": "{\"name\":\"65fef0c975e19d6f5283\",\"layouts\":[{\"id\":0,\"position\":{\"x\":850.4176157934701,\"y\":481.0933940774488,\"z\":6000,\"width\":427.6385725132878,\"height\":230.34168564920276,\"tabOrder\":6000}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"Regions.Region\"},{\"queryRef\":\"Products.Product\"},{\"queryRef\":\"Sum(Sales.Amount)\"},{\"queryRef\":\"Sales.Smartphone Sales\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"p\",\"Entity\":\"Products\",\"Type\":0},{\"Name\":\"r\",\"Entity\":\"Regions\",\"Type\":0},{\"Name\":\"s\",\"Entity\":\"Sales\",\"Type\":0},{\"Name\":\"_\",\"Entity\":\"_Measures\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"Product\"},\"Name\":\"Products.Product\",\"NativeReferenceName\":\"Product\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"r\"}},\"Property\":\"Region\"},\"Name\":\"Regions.Region\",\"NativeReferenceName\":\"Region\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"Smartphone Sales\"},\"Name\":\"Sales.Smartphone Sales\",\"NativeReferenceName\":\"Smartphone Sales\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Amount\"}},\"Function\":0},\"Name\":\"Sum(Sales.Amount)\",\"NativeReferenceName\":\"Amount\"}]},\"drillFilterOtherVisuals\":true}}",
+          "filters": "[]",
+          "height": 230.34,
+          "width": 427.64,
+          "x": 850.42,
+          "y": 481.09,
+          "z": 6000.00
+        }
+      ],
+      "width": 1280.00
+    },
+    {
+      "config": "{}",
+      "displayName": "lastNDaySales",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "f57b08e66eb122c993d3",
+      "ordinal": 2,
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"599cff17d8d410530926\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":30.576559961357745,\"z\":1,\"width\":323.7518113555526,\"height\":158.27866332938126,\"tabOrder\":1}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"Dates.Year\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"Dates\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Year\"},\"Name\":\"Dates.Year\",\"NativeReferenceName\":\"Sum of Year\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Basic'\"}}}}}],\"general\":[{\"properties\":{\"orientation\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}},\"filter\":{\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"Dates\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Year\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"2023L\"}}]]}}}]}}}}],\"items\":[{\"properties\":{\"textSize\":{\"expr\":{\"Literal\":{\"Value\":\"16D\"}}}}}],\"header\":[{\"properties\":{\"textSize\":{\"expr\":{\"Literal\":{\"Value\":\"16D\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 158.28,
+          "width": 323.75,
+          "x": 0.00,
+          "y": 30.58,
+          "z": 1.00
+        },
+        {
+          "config": "{\"name\":\"6128563806293c143d1e\",\"layouts\":[{\"id\":0,\"position\":{\"x\":672.542372881356,\"y\":156.6854990583804,\"z\":2,\"width\":455.59322033898303,\"height\":163.91713747645952,\"tabOrder\":2}}],\"singleVisual\":{\"visualType\":\"card\",\"projections\":{\"Values\":[{\"queryRef\":\"_Measures.last5DaysSalesAmount\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"_\",\"Entity\":\"_Measures\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"last5DaysSalesAmount\"},\"Name\":\"_Measures.last5DaysSalesAmount\",\"NativeReferenceName\":\"last5DaysSalesAmount\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"labels\":[{\"properties\":{\"labelDisplayUnits\":{\"expr\":{\"Literal\":{\"Value\":\"1D\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 163.92,
+          "width": 455.59,
+          "x": 672.54,
+          "y": 156.69,
+          "z": 2.00
+        },
+        {
+          "config": "{\"name\":\"6c3671cf579bed80856d\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":185.25798094234398,\"z\":0,\"width\":514.4056558204892,\"height\":534.1904887366618}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"Dates.Date\"},{\"queryRef\":\"_Measures.totalamount\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"Dates\",\"Type\":0},{\"Name\":\"_\",\"Entity\":\"_Measures\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Date\"},\"Name\":\"Dates.Date\",\"NativeReferenceName\":\"Date\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"totalamount\"},\"Name\":\"_Measures.totalamount\",\"NativeReferenceName\":\"totalamount\"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Date\"}}}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"values\":[{\"properties\":{\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"17D\"}}}}}],\"columnHeaders\":[{\"properties\":{\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"17D\"}}}}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"titleWrap\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"background\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 534.19,
+          "width": 514.41,
+          "x": 0.00,
+          "y": 185.26,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"c03d127f0d3ab32a886b\",\"layouts\":[{\"id\":0,\"position\":{\"x\":672.6843191498704,\"y\":390.3007948008606,\"z\":3,\"width\":455.05115707197115,\"height\":154.68142098098625,\"tabOrder\":3}}],\"singleVisual\":{\"visualType\":\"card\",\"projections\":{\"Values\":[{\"queryRef\":\"_Measures.last5DaysSalesAmount(diff)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"_\",\"Entity\":\"_Measures\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"last5DaysSalesAmount(diff)\"},\"Name\":\"_Measures.last5DaysSalesAmount(diff)\",\"NativeReferenceName\":\"last5DaysSalesAmount(diff)\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"last5DaysSalesAmount(diff)\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"labels\":[{\"properties\":{\"labelDisplayUnits\":{\"expr\":{\"Literal\":{\"Value\":\"1D\"}}}}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"titleWrap\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"background\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 154.68,
+          "width": 455.05,
+          "x": 672.68,
+          "y": 390.30,
+          "z": 3.00
+        }
+      ],
+      "width": 1280.00
+    }
+  ]
+}

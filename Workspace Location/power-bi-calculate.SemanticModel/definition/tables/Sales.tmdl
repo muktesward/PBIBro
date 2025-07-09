@@ -1,0 +1,103 @@
+table Sales
+	lineageTag: 2915678d-2a2b-4044-b613-030d4cc994e6
+
+	measure 'Previous 3 Month Qty' =
+			
+			CALCULATE(
+			    COUNT(Sales[SalesID]),
+			    DATESINPERIOD(Dates[Date], LASTDATE(Dates[Date]), -3, MONTH)
+			)
+		formatString: 0
+		lineageTag: 92761a90-f1be-4a8e-b210-0deb206d0344
+
+	measure '3 Month Sales' =
+			
+			CALCULATE(
+			    SUM(Sales[Amount]),
+			    DATESINPERIOD(Dates[Date], LASTDATE(Dates[Date]), -3, MONTH)
+			)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 3968c7d8-cfab-4d92-b946-5417d12ade22
+
+	column SalesID
+		dataType: int64
+		formatString: 0
+		lineageTag: 6da36e8a-b899-4fc7-987e-edb8fa75d33c
+		summarizeBy: count
+		sourceColumn: SalesID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductID
+		dataType: int64
+		formatString: 0
+		lineageTag: e1d6cb78-ec0d-445d-acc2-a13379625573
+		summarizeBy: none
+		sourceColumn: ProductID
+
+		annotation SummarizationSetBy = Automatic
+
+	column RegionID
+		dataType: int64
+		formatString: 0
+		lineageTag: 79f0473a-541b-4c40-a462-f42169a579eb
+		summarizeBy: none
+		sourceColumn: RegionID
+
+		annotation SummarizationSetBy = Automatic
+
+	column EmployeeID
+		dataType: int64
+		formatString: 0
+		lineageTag: 159dd564-ba05-41ce-9fef-51e08015154e
+		summarizeBy: none
+		sourceColumn: EmployeeID
+
+		annotation SummarizationSetBy = Automatic
+
+	column SalesDate
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: e6c008fa-0932-42c8-a3dc-0840a397e82d
+		summarizeBy: none
+		sourceColumn: SalesDate
+
+		variation Variation
+			isDefault
+			relationship: 9cac1fdf-2b11-48fc-b100-2236b0a30a9a
+			defaultHierarchy: LocalDateTable_efaa5548-4d31-4504-8156-1eb1363d0e16.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Amount
+		dataType: int64
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: c768907e-5163-4bb9-a050-18742c75a346
+		summarizeBy: sum
+		sourceColumn: Amount
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date Key' = FORMAT(Sales[SalesDate], "YYYYMMDD")
+		dataType: int64
+		formatString: 0
+		lineageTag: 5dbe2fa7-c61e-4653-8cc2-bae300453fc7
+		summarizeBy: count
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Sales-41b6d84b-ee02-416e-8ddf-bf2042c5baf2 = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("ZZdJbuUwDETv4nUAW6QG6ixB3/8a7UhiqUwtgp8gDxyKg/h/f690/YwfWZ/pTrc8Mv58nuf69/M7/qfM3eKM9MUo25h2AFlZUF6GYPBO1aHslsr6pwLSxyFnKnkaYdyw03UxLdiRO5UjNWNHE2rITRbUKbfpTWCp2oLSExTQHVN1AVIKUioFlZNTro9/5lsUthz6VGRChvxgKkpedn1dzFQOph9CpRrcvYYQU3OoBaVeKMMUlDLXcVMQPUGq7jrCoeQjP3ko7kVBBQXFdmaGghSzKypCtobUd4JYgmH4lG9SKKF680kOOb69gHmorryUkGPlHF0JqSGudgOS7FDj1hvQro+CcumJglzZ+106hZQGJXsEPSx9whC+1O4tF1Xjgmk0PN4RGhv+hepRa9WQom0d/vp0Ufn6zqFRfRrCKkQsavegV1Fr6BujFBXRt5PSM3q7vlV8KXis8Oi7RjZlR1z5ub5rxGhHFveYU8ix33bMdXZHbqrfCaaad0TWEPxL9WOwcyYRdFC76QWPQCFbk9rBmxco1xD8X1RI0Qcot0il3ROALDj8m2q0hCB6XzhCGCrUXYryELZc7mWS8Ipxo47fhYRNnmZhUR3bcwtMCZOFIVE8L8ULkMjaHiSkUGKmjFVg9fq2xnjRzxR46S9re0qwXYsR4tY0boLCq2e+/qNSyj1bnwPqDrmh+nE1mKnrWC+gztNmCjFeXVwbH+WvcSUgKED5+i5NufUIqhyG8sFw48+7BckVF7Oy5isigSWEFCUXyq74Mqm+cjDjN0ypd1aLkq/rZqjpDLuaTIOWgD6DOKA5Fl7hhWkIXbl83qEtH5SgMg0u+ZWdcQlkT6Dq9R0xpnAKtnhV5l3lhuDtgNLuYkjKq34dcAhePSyLB05eO5WVt0+/TAgOsVKNnc1bCVCFqbjpC8UOGYzPm3VQlWO6jNt92pqP2dwSTrHw05amOBXWKMN5KdXTkgVLfsANRf1ZNN/zCaYENcRz3XnNT1sCj4pvBkysM68fDdjjG9tof3g79HhXtp0hnvTuS0YB7ahwHvSoe1sv7KBc0s7rfZ5AkAEXam8hKiNJG8IyMrOobQtU/B5l3Fr4ovE8lB+fZsPYwP79Bw==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [SalesID = _t, ProductID = _t, RegionID = _t, EmployeeID = _t, SalesDate = _t, Amount = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"SalesID", Int64.Type}, {"ProductID", Int64.Type}, {"RegionID", Int64.Type}, {"EmployeeID", Int64.Type}, {"SalesDate", type date}, {"Amount", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

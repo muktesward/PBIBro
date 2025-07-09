@@ -1,0 +1,96 @@
+table Dates
+	lineageTag: faa0ca82-25ba-4195-8638-5e4d48307d2a
+	dataCategory: Time
+
+	column Date
+		isKey
+		formatString: Short Date
+		lineageTag: 721574b0-fd49-47fd-a14b-b71e1c3e7bee
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year = Year(Dates[Date])
+		formatString: 0
+		lineageTag: 0c358f8d-75e0-4213-972e-2da0bee87db9
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter = QUARTER(Dates[Date])
+		formatString: 0
+		lineageTag: a9655935-35f9-4aca-bc9b-d49973382758
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month = FORMAT(Dates[Date], "mmmm")
+		lineageTag: 62fa954d-acaf-4829-b8b2-6b675a909031
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mon = FORMAT(Dates[Date], "mmm")
+		lineageTag: 2bdf6ca8-d78f-4ec3-a545-2e7bc97e5b9b
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Number' = MONTH(Dates[Date])
+		formatString: 0
+		lineageTag: 1baaebf6-2f28-49a7-869e-94c2c220af83
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Year' = FORMAT(Dates[Date], "mmm YYYY")
+		lineageTag: 56268152-ccaa-48b4-9876-486c6f4cf60a
+		summarizeBy: none
+		sortByColumn: 'Month Year Sort'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Year Sort' = FORMAT(Dates[Date], "YYYYMM")
+		lineageTag: a6b3f4c8-4629-4a16-8e1e-b6b8ea24750e
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Quarter' = FORMAT(Dates[Date], "YYYY \QTR-q")
+		lineageTag: f47b7d73-94cd-4113-8397-9e94bdb6f8b3
+		summarizeBy: none
+		sortByColumn: 'Year Quarter Sort'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date Key' = FORMAT(Dates[Date], "YYYYMMDD")
+		dataType: int64
+		formatString: 0
+		lineageTag: 267f28e8-d5af-48f1-bfd5-7900d04edb60
+		summarizeBy: count
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateHierarchy = Dates[Date]
+		formatString: Short Date
+		lineageTag: 3fb18934-f62a-487a-b151-5a0ee1f5bce4
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Quarter Sort' = Dates[Year] & Dates[Quarter]
+		dataType: int64
+		formatString: 0
+		lineageTag: b894b5d4-0dfe-4186-b3f9-b785f5776e7a
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dates-d10c016e-c904-41f5-bdcc-1ba788be5d12 = calculated
+		mode: import
+		source = CALENDARAUTO(12)
+
+	annotation PBI_Id = 4239d3d002c2478288df217a0eb9797d
+
